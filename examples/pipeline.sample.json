@@ -1,0 +1,44 @@
+{
+  "input_las": "data/floor_01.las",
+  "output_obj": "output/floor_01.obj",
+  "output_report": "output/floor_01.report.json",
+  "debug_cloud_dir": "output/debug/floor_01",
+  "las_chunk_size": 1000000,
+  "translate_to_local_origin": true,
+  "roi": {
+    "enabled": true,
+    "min": [0.0, 0.0, -5.0],
+    "max": [60.0, 45.0, 8.0]
+  },
+  "preprocess": {
+    "voxel_size": 0.05,
+    "statistical_outlier_neighbors": 24,
+    "statistical_outlier_std_ratio": 2.5
+  },
+  "plane_detection": {
+    "distance_threshold": 0.03,
+    "ransac_n": 3,
+    "num_iterations": 2000,
+    "min_plane_points": 8000,
+    "max_planes": 32,
+    "horizontal_angle_threshold_degrees": 15.0,
+    "extent_trim_percent": 2.0
+  },
+  "mesh": {
+    "min_plane_extent": 0.4,
+    "merge_normal_angle_degrees": 5.0,
+    "merge_plane_offset_threshold": 0.08,
+    "merge_gap_threshold": 1.5,
+    "merge_min_overlap": 0.25,
+    "enable_opening_detection": true,
+    "opening_grid_resolution": 0.1,
+    "opening_neighbor_fill_radius": 1,
+    "opening_min_width": 0.5,
+    "opening_min_height": 0.5,
+    "opening_min_area": 0.35,
+    "door_max_width": 2.0
+  },
+  "debug": {
+    "export_intermediate_clouds": true
+  }
+}
