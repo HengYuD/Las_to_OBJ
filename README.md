@@ -85,6 +85,7 @@ python -m las_to_obj.cli run --config pipeline.local.json
 - 首轮参数调优先看 `preprocessed.ply`、`remaining_after_planes.ply` 和报告里的平面数量。
 - 若墙面过碎，先调大 `voxel_size`，再调大 `distance_threshold` 和 `min_plane_points`。
 - 若平面被错误合并，先减小 `distance_threshold`，再减小 `extent_trim_percent`。
+- 若输出主要是水平面、墙面缺失，优先降低 `min_wall_points`（如 `1200~3000`），并把 `max_horizontal_planes` 限制到 `1~2`，避免地/顶面占满平面配额。
 
 ## 下一步建议
 

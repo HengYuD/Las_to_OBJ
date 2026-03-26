@@ -42,6 +42,7 @@ def extract_plane_regions(
     z_median = float(np.median(remaining[:, 2]))
     regions: list[PlaneRegion] = []
     rejected = 0
+    accepted_horizontal_planes = 0
 
     for plane_index in range(plane_config.max_planes):
         if len(remaining) < plane_config.min_plane_points:
@@ -71,14 +72,27 @@ def extract_plane_regions(
             horizontal_angle_threshold_degrees=plane_config.horizontal_angle_threshold_degrees,
         )
 
-        regions.append(
-            make_plane_region(
-                label=label,
-                plane_model=tuple(float(v) for v in plane_model),
-                flattened_points=flattened_points,
-                source_name=f"{label}_{plane_index:03d}",
+        accepted = True
+        if label == "wall":
+            if len(inlier_indices) < plane_config.min_wall_points:
+                accepted = False
+        else:
+            if accepted_horizontal_planes >= plane_config.max_horizontal_planes:
+                accepted = False
+            else:
+                accepted_horizontal_planes += 1
+
+        if not accepted:
+            rejected += 1
+        else:
+            regions.append(
+                make_plane_region(
+                    label=label,
+                    plane_model=tuple(float(v) for v in plane_model),
+                    flattened_points=flattened_points,
+                    source_name=f"{label}_{plane_index:03d}",
+                )
             )
-        )
 
         keep_mask = np.ones(len(remaining), dtype=bool)
         keep_mask[inlier_indices] = False

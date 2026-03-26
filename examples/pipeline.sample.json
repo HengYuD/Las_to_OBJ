@@ -20,7 +20,9 @@
     "ransac_n": 3,
     "num_iterations": 2000,
     "min_plane_points": 8000,
+    "min_wall_points": 3000,
     "max_planes": 32,
+    "max_horizontal_planes": 2,
     "horizontal_angle_threshold_degrees": 15.0,
     "extent_trim_percent": 2.0
   },
