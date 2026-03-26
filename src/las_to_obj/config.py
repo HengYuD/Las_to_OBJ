@@ -61,7 +61,9 @@ class PlaneDetectionConfig:
     ransac_n: int = 3
     num_iterations: int = 2000
     min_plane_points: int = 8000
+    min_wall_points: int = 3000
     max_planes: int = 32
+    max_horizontal_planes: int = 2
     horizontal_angle_threshold_degrees: float = 15.0
     extent_trim_percent: float = 2.0
 
@@ -73,7 +75,9 @@ class PlaneDetectionConfig:
             ransac_n=int(data.get("ransac_n", 3)),
             num_iterations=int(data.get("num_iterations", 2000)),
             min_plane_points=int(data.get("min_plane_points", 8000)),
+            min_wall_points=int(data.get("min_wall_points", data.get("min_plane_points", 8000))),
             max_planes=int(data.get("max_planes", 32)),
+            max_horizontal_planes=int(data.get("max_horizontal_planes", 2)),
             horizontal_angle_threshold_degrees=float(
                 data.get("horizontal_angle_threshold_degrees", 15.0)
             ),
